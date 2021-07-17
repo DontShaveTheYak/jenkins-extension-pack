@@ -1,0 +1,24 @@
+{
+    "name": "jenkins-extension-pack",
+    "displayName": "Jenkins Extension Pack",
+    "publisher": "DontShaveTheYak",
+    "description": "Make Jenkins development quick and easy.",
+    "homepage": "https://github.com/DontShaveTheYak/jenkins-extension-pack",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DontShaveTheYak/jenkins-extension-pack.git"
+    },
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.58.0"
+    },
+    "categories": [
+        "Extension Packs"
+    ],
+    "extensionPack": [
+        "Maarti.jenkins-doc",
+        "NicolasVuillamy.vscode-groovy-lint",
+        "DontShaveTheYak.groovy-guru"
+    ],
+    "icon": "icon.png"
+}
