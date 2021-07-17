@@ -9,6 +9,12 @@
         "url": "https://github.com/DontShaveTheYak/jenkins-extension-pack.git"
     },
     "version": "0.1.0",
+    "keywords": [
+        "jenkins",
+        "groovy",
+        "vscode",
+        "extension"
+    ],
     "engines": {
         "vscode": "^1.58.0"
     },
