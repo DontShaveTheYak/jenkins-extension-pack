@@ -20,5 +20,12 @@
         "NicolasVuillamy.vscode-groovy-lint",
         "DontShaveTheYak.groovy-guru"
     ],
-    "icon": "icon.png"
+    "scripts": {
+        "package": "vsce package --no-git-tag-version",
+        "publish": "vsce publish --no-git-tag-version --packagePath"
+    },
+    "icon": "icon.png",
+    "devDependencies": {
+        "vsce": "^1.95.1"
+    }
 }
