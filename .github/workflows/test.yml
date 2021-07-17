@@ -1,0 +1,32 @@
+name: Tests
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create Draft Release
+        id: release
+        uses: release-drafter/release-drafter@v5.15.0
+        with:
+          publish: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Package Extension
+        run: npm run package ${{ steps.release.outputs.tag_name }}

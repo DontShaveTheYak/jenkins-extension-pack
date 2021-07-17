@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  pull_request:
+    types: closed
+
+jobs:
+  tag:
+    name: Package and Publish Extension
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged && github.base_ref == 'master'
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 0
+
+      - name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create Draft Release
+        id: release
+        uses: release-drafter/release-drafter@v5.15.0
+        with:
+          publish: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Package Extension
+        run: npm run package -- ${{ steps.release.outputs.tag_name }}
+
+      - name: Upload extension
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: jenkins-extension-pack-${{ steps.release.outputs.tag_name }}.vsix
+          tag: ${{ steps.release.outputs.tag_name }}
+          overwrite: true
+
+      - name: Publish Extension
+        run: npm run publish -- jenkins-extension-pack-${{ steps.release.outputs.tag_name }}.vsix
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
