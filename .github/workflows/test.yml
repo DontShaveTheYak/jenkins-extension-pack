@@ -29,4 +29,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Package Extension
-        run: npm run package ${{ steps.release.outputs.tag_name }}
+        run: npm run package -- ${{ steps.release.outputs.tag_name }}
